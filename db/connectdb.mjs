@@ -13,7 +13,7 @@ async function connectToMySQL() {
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0,
-      connectTimeout: 10000,
+      connectTimeout: 30000,
     })
     console.log('Successful connection to the MySQL')
     return pool
