@@ -1,16 +1,10 @@
-import { createClient } from 'redis'
+import { Redis } from '@upstash/redis'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const redisClient = createClient({
-  url: process.env.REDIS_URL,
-  socket: {
-    tls: true,
-  },
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
 })
 
-redisClient.on('error', (err) => console.error('❌ Redis Client Error:', err))
-
-await redisClient.connect()
-
-export default redisClient
+export default redis
