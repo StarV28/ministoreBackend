@@ -1,6 +1,6 @@
-import config from '../config/default.mjs';
+import config from '../config/default.mjs'
 // Імпортуємо необхідний модуль
-import mysql from 'mysql2/promise';
+import mysql from 'mysql2/promise'
 
 // Функція для підключення до MySQL
 async function connectToMySQL() {
@@ -10,14 +10,18 @@ async function connectToMySQL() {
       user: config.db.mysql.user,
       password: config.db.mysql.password,
       database: config.db.mysql.database,
-    });
-    console.log('Successful connection to the MySQL');
-    return pool;
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0,
+      connectTimeout: 10000,
+    })
+    console.log('Successful connection to the MySQL')
+    return pool
   } catch (err) {
-    console.error('Error connection to the MySQL:', err);
+    console.error('Error connection to the MySQL:', err)
   }
 }
 
-const pool = await connectToMySQL();
+const pool = await connectToMySQL()
 
-export default pool;
+export default pool
